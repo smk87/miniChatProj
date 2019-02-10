@@ -5,11 +5,13 @@ import {
   View,
   Image,
   Text,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  TouchableOpacity
 } from "react-native";
 import Forms from "./Forms";
+import { Overlay } from "react-native-elements";
 
-export default class Login extends Component {
+export default class Register extends Component {
   constructor() {
     super();
 
@@ -28,12 +30,14 @@ export default class Login extends Component {
     this.setState({
       username: e
     });
+    console.log(this.state.username);
   };
 
   onGetPassword = e => {
     this.setState({
       password: e
     });
+    console.log(this.state.password);
   };
 
   onPress = () => {
@@ -43,9 +47,12 @@ export default class Login extends Component {
     };
 
     axios
-      .post("http://192.168.0.105:3000/api/user/login", newUser)
+      .post("http://192.168.0.105:3000/api/user/register", newUser)
       .then(res => {
         console.log(res.data);
+        this.props.navigation.push("Login", {
+          success: "You Have Joined. You Can Login To Chat Now."
+        });
       })
       .catch(err => {
         console.log(err.response.data);
@@ -53,24 +60,30 @@ export default class Login extends Component {
       });
   };
 
-  render() {
-    const { navigation } = this.props;
+  onPressLogin = () => {
+    console.log("Clicked");
+    this.props.navigation.push("Login");
+  };
 
+  render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.logocontainer}>
           <Image style={styles.logo} source={require("../img/chat2.png")} />
           <Text style={styles.title}> A Chat App </Text>
+          <TouchableOpacity
+            onPress={this.onPressLogin}
+            style={styles.clickhere}
+          >
+            <Text style={styles.clicktext}>Already Joined?</Text>
+          </TouchableOpacity>
           <View style={styles.formcontainer}>
-            <Text style={styles.successtext} h1>
-              {navigation.getParam("success", "")}
-            </Text>
             <Forms
               errors={this.state.errors}
               onGetUsername={this.onGetUsername}
               onGetPassword={this.onGetPassword}
               onPress={this.onPress}
-              msg="Log In"
+              msg="Join"
             />
           </View>
         </View>
@@ -113,11 +126,5 @@ const styles = StyleSheet.create({
   },
   clicktext: {
     color: "#3498db"
-  },
-  successtext: {
-    color: "white",
-    alignSelf: "center",
-    fontSize: 20,
-    textAlign: "center"
   }
 });

@@ -28,12 +28,14 @@ export default class Login extends Component {
     this.setState({
       username: e
     });
+    console.log(this.state.username);
   };
 
   onGetPassword = e => {
     this.setState({
       password: e
     });
+    console.log(this.state.password);
   };
 
   onPress = () => {
@@ -46,6 +48,9 @@ export default class Login extends Component {
       .post("http://192.168.0.105:3000/api/user/login", newUser)
       .then(res => {
         console.log(res.data);
+        this.props.navigation.push("Login", {
+          success: "You Joined. You Login To Chat Now."
+        });
       })
       .catch(err => {
         console.log(err.response.data);
@@ -58,13 +63,12 @@ export default class Login extends Component {
 
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <Text h1>{navigation.getParam("success", "")}</Text>
+        {console.log(this.props.navigation.state.params)}
         <View style={styles.logocontainer}>
           <Image style={styles.logo} source={require("../img/chat2.png")} />
           <Text style={styles.title}> A Chat App </Text>
           <View style={styles.formcontainer}>
-            <Text style={styles.successtext} h1>
-              {navigation.getParam("success", "")}
-            </Text>
             <Forms
               errors={this.state.errors}
               onGetUsername={this.onGetUsername}
@@ -115,9 +119,6 @@ const styles = StyleSheet.create({
     color: "#3498db"
   },
   successtext: {
-    color: "white",
-    alignSelf: "center",
-    fontSize: 20,
-    textAlign: "center"
+    color: "white"
   }
 });

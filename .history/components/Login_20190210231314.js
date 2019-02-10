@@ -28,12 +28,14 @@ export default class Login extends Component {
     this.setState({
       username: e
     });
+    console.log(this.state.username);
   };
 
   onGetPassword = e => {
     this.setState({
       password: e
     });
+    console.log(this.state.password);
   };
 
   onPress = () => {
