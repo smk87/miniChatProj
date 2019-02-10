@@ -16,7 +16,7 @@ public class MainActivity extends ReactActivity {
         return "miniChatProj";
     }
 
-      @Override
+    +  @Override
   protected ReactActivityDelegate createReactActivityDelegate() {
     return new ReactActivityDelegate(this, getMainComponentName()) {
       @Override

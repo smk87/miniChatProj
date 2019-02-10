@@ -4,38 +4,19 @@ import {
   View,
   Image,
   Text,
-  KeyboardAvoidingView,
-  TouchableOpacity
+  KeyboardAvoidingView
 } from "react-native";
-import LoginForm from "./Forms";
+import Forms from "./Forms";
 
-export default class Register extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    header: null
-  });
-  onPress = () => {
-    console.log("Clicked!");
-    //this.props.navigation.push("Login");
-  };
-
-  onPressLogin = () => {
-    this.props.navigation.push("Login");
-  };
-
+export default class Login extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.logocontainer}>
           <Image style={styles.logo} source={require("../img/chat2.png")} />
           <Text style={styles.title}> A Chat App </Text>
-          <TouchableOpacity
-            onPress={this.onPressLogin}
-            style={styles.clickhere}
-          >
-            <Text style={styles.clicktext}>Already Joined?</Text>
-          </TouchableOpacity>
           <View style={styles.formcontainer}>
-            <LoginForm onPress={this.onPress} msg="Join" />
+            <Forms msg="Log In" />
           </View>
         </View>
       </KeyboardAvoidingView>
@@ -69,12 +50,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     opacity: 0.9,
     fontSize: 20
-  },
-  clickhere: {
-    alignSelf: "center",
-    marginTop: 10
-  },
-  clicktext: {
-    color: "#3498db"
   }
 });

@@ -18,20 +18,13 @@ export default class Register extends Component {
     //this.props.navigation.push("Login");
   };
 
-  onPressLogin = () => {
-    this.props.navigation.push("Login");
-  };
-
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.logocontainer}>
           <Image style={styles.logo} source={require("../img/chat2.png")} />
           <Text style={styles.title}> A Chat App </Text>
-          <TouchableOpacity
-            onPress={this.onPressLogin}
-            style={styles.clickhere}
-          >
+          <TouchableOpacity style={styles.clickhere}>
             <Text style={styles.clicktext}>Already Joined?</Text>
           </TouchableOpacity>
           <View style={styles.formcontainer}>

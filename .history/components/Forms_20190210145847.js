@@ -11,8 +11,11 @@ import {
 import Icon from "native-base";
 
 export default class LoginForm extends Component {
+  onSubmit = () => {
+    console.log("HOise2");
+  };
+
   render() {
-    const { onPress } = this.props;
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
@@ -27,8 +30,10 @@ export default class LoginForm extends Component {
           secureTextEntry
           style={styles.input}
         />
-        <TouchableOpacity onPress={onPress} style={styles.btn}>
-          <Text style={styles.btntext}>{this.props.msg}</Text>
+        <TouchableOpacity onPress={this.onSubmit} style={styles.btn}>
+          <Text onPress={this.props.onPress} style={styles.btntext}>
+            {this.props.msg}
+          </Text>
         </TouchableOpacity>
       </View>
     );

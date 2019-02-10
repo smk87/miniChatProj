@@ -27,7 +27,7 @@ export default class LoginForm extends Component {
           secureTextEntry
           style={styles.input}
         />
-        <TouchableOpacity onPress={onPress} style={styles.btn}>
+        <TouchableOpacity onPress={this.onPress} style={styles.btn}>
           <Text style={styles.btntext}>{this.props.msg}</Text>
         </TouchableOpacity>
       </View>

@@ -8,7 +8,8 @@ import {
 } from "react-native";
 import {
   createStackNavigator,
-  createNavigationContainer
+  createNavigationContainer,
+  createAppContainer
 } from "react-navigation";
 
 import Login from "./components/Login";
@@ -16,7 +17,10 @@ import Register from "./components/Register";
 
 const AppStack = createStackNavigator({
   HomeScreen: {
-    screen: Register
+    screen: Register,
+    navigationOptions: ({ navigation }) => ({
+      title: "Register"
+    })
   },
   Login: { screen: Login }
 });
@@ -35,4 +39,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default createNavigationContainer(AppStack);
+export default createAppContainer(AppStack);

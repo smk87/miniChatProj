@@ -15,15 +15,18 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 
 const AppStack = createStackNavigator({
+  Login,
   HomeScreen: {
-    screen: Register
-  },
-  Login: { screen: Login }
+    screen: Register,
+    navigationOptions: ({ navigation }) => ({
+      title: "Register"
+    })
+  }
 });
 
-class App extends Component {
+export default class App extends Component {
   render() {
-    return <AppStack />;
+    return <Register />;
   }
 }
 
@@ -34,5 +37,3 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
-
-export default createNavigationContainer(AppStack);

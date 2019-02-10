@@ -6,24 +6,20 @@ import {
   View,
   ImageBackground
 } from "react-native";
-import {
-  createStackNavigator,
-  createNavigationContainer
-} from "react-navigation";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
 
-const AppStack = createStackNavigator({
-  HomeScreen: {
+const NavigationApp = createStackNavigator({
+  Home: {
     screen: Register
-  },
-  Login: { screen: Login }
+  }
 });
 
-class App extends Component {
+export default class App extends Component {
   render() {
-    return <AppStack />;
+    return <NavigationApp />;
   }
 }
 
@@ -34,5 +30,3 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
-
-export default createNavigationContainer(AppStack);

@@ -16,7 +16,10 @@ import Register from "./components/Register";
 
 const AppStack = createStackNavigator({
   HomeScreen: {
-    screen: Register
+    screen: Register,
+    navigationOptions: ({ navigation }) => ({
+      title: "Register"
+    })
   },
   Login: { screen: Login }
 });
