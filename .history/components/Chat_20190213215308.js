@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
   textzone: {
     width: "100%",
-    height: "82%",
+    height: "70%",
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",

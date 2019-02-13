@@ -54,7 +54,7 @@ export default class chat extends Component {
       body: this.state.send
     };
     axios
-      .post(`${ip}/api/chat`, newText)
+      .post("http://192.168.43.164:3000/api/chat", newText)
       .then(res => {})
       .catch(err => console.log(err));
 
@@ -124,6 +124,10 @@ export default class chat extends Component {
             />
           }
         />
+        <Text>This is chat.</Text>
+        <TouchableOpacity onPress={this.test}>
+          <Text>Click To Test API</Text>
+        </TouchableOpacity>
 
         <View style={styles.textzone}>
           <ChatMessage socket={this.socket} />
@@ -165,9 +169,10 @@ const styles = StyleSheet.create({
   },
   textzone: {
     width: "100%",
-    height: "82%",
+    height: "70%",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
     position: "absolute",
     bottom: 50
   }

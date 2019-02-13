@@ -12,7 +12,6 @@ import Forms from "./Forms";
 import saveAuthToken from "../util/saveAuthToken";
 import storeToken from "../util/storeToken";
 import loadToken from "../util/loadToken";
-import ip from "../util/serverip";
 
 export default class Login extends Component {
   constructor() {
@@ -50,7 +49,7 @@ export default class Login extends Component {
     };
 
     axios
-      .post(`${ip}/api/user/login`, newUser)
+      .post("http://192.168.43.164:3000//api/user/login", newUser)
       .then(res => {
         console.log(res.data);
         const { token } = res.data;

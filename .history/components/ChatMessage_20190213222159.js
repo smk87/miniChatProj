@@ -40,7 +40,7 @@ export default class ChatMessage extends Component {
       this.setState({ typing: true, whotyping: data.username });
     });
     this.props.socket.on("stop typing", () => {
-      this.setState({ typing: false, whotyping: "" });
+      this.setState({ typing: false });
     });
 
     this.props.socket.on("new message", message => {
@@ -82,8 +82,8 @@ export default class ChatMessage extends Component {
           </View>
         ))}
         <Text style={{ alignSelf: "center", marginBottom: 10 }}>
-          {this.state.whotyping}
-          {this.state.typing ? " is Typing..." : ""}
+          {" "}
+          {this.state.typing ? "Typing..." : ""}
         </Text>
       </ScrollView>
     );
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     width: "85%",
     backgroundColor: "#7f8c8d",
     marginBottom: 10,
-    height: "auto",
+    height: 40,
     alignSelf: "center",
     borderRadius: 10
   }

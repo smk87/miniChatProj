@@ -1,0 +1,1 @@
+export default const ip ="http://192.168.43.164:3000";

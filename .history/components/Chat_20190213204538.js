@@ -18,7 +18,6 @@ import loadToken from "../util/loadToken";
 import ChatInput from "./ChatInput";
 import ChatMessage from "./ChatMessage";
 import saveAuthToken from "../util/saveAuthToken";
-import ip from "../util/serverip";
 
 //Ignore warning
 console.ignoredYellowBox = ["Remote debugger"];
@@ -36,9 +35,7 @@ export default class chat extends Component {
     };
 
     // Creating the socket-client instance will automatically connect to the server.
-    this.socket = SocketIOClient(ip, {
-      jsonp: false
-    });
+    this.socket = SocketIOClient("http://192.168.0.105:3000", { jsonp: false });
   }
 
   static navigationOptions = ({ navigation }) => ({
@@ -54,7 +51,7 @@ export default class chat extends Component {
       body: this.state.send
     };
     axios
-      .post(`${ip}/api/chat`, newText)
+      .post("http://192.168.43.164:3000/api/chat", newText)
       .then(res => {})
       .catch(err => console.log(err));
 
@@ -124,6 +121,10 @@ export default class chat extends Component {
             />
           }
         />
+        <Text>This is chat.</Text>
+        <TouchableOpacity onPress={this.test}>
+          <Text>Click To Test API</Text>
+        </TouchableOpacity>
 
         <View style={styles.textzone}>
           <ChatMessage socket={this.socket} />
@@ -165,9 +166,10 @@ const styles = StyleSheet.create({
   },
   textzone: {
     width: "100%",
-    height: "82%",
+    height: "70%",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
     position: "absolute",
     bottom: 50
   }

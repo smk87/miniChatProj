@@ -124,6 +124,10 @@ export default class chat extends Component {
             />
           }
         />
+        <Text>This is chat.</Text>
+        <TouchableOpacity onPress={this.test}>
+          <Text>Click To Test API</Text>
+        </TouchableOpacity>
 
         <View style={styles.textzone}>
           <ChatMessage socket={this.socket} />
@@ -165,7 +169,7 @@ const styles = StyleSheet.create({
   },
   textzone: {
     width: "100%",
-    height: "82%",
+    height: "70%",
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",

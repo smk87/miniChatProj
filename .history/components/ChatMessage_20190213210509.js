@@ -19,9 +19,7 @@ export default class ChatMessage extends Component {
     super(props);
 
     this.state = {
-      texts: [],
-      typing: false,
-      whotyping: ""
+      texts: []
     };
 
     this.props.socket.on("self update", message => {
@@ -36,11 +34,18 @@ export default class ChatMessage extends Component {
       this.setState({ texts: this.state.texts.concat(newText) });
     });
 
-    this.props.socket.on("typing", data => {
-      this.setState({ typing: true, whotyping: data.username });
+    // when the client emits 'typing', we broadcast it to others
+    socket.on("typing", () => {
+      socket.broadcast.emit("typing", {
+        username: socket.username
+      });
     });
-    this.props.socket.on("stop typing", () => {
-      this.setState({ typing: false, whotyping: "" });
+
+    // when the client emits 'stop typing', we broadcast it to others
+    socket.on("stop typing", () => {
+      socket.broadcast.emit("stop typing", {
+        username: socket.username
+      });
     });
 
     this.props.socket.on("new message", message => {
@@ -65,26 +70,15 @@ export default class ChatMessage extends Component {
     const { socket } = this.props;
 
     return (
-      <ScrollView
-        style={styles.container}
-        ref={ref => (this.scrollView = ref)}
-        onContentSizeChange={(contentWidth, contentHeight) => {
-          this.scrollView.scrollToEnd({ animated: true });
-        }}
-      >
+      <ScrollView style={styles.container}>
+        <Text>This is a message</Text>
         {this.state.texts.map(item => (
-          <View style={styles.msg}>
-            <Text
-              style={{ alignSelf: "flex-start", color: "white", fontSize: 20 }}
-            >
+          <View>
+            <Text style={{ alignSelf: "center" }}>
               {item.author.username}: {item.body}
             </Text>
           </View>
         ))}
-        <Text style={{ alignSelf: "center", marginBottom: 10 }}>
-          {this.state.whotyping}
-          {this.state.typing ? " is Typing..." : ""}
-        </Text>
       </ScrollView>
     );
   }
@@ -93,18 +87,11 @@ export default class ChatMessage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "white",
     width: "100%"
   },
   icon: {
     marginLeft: -20,
     marginRight: 10
-  },
-  msg: {
-    width: "85%",
-    backgroundColor: "#7f8c8d",
-    marginBottom: 10,
-    height: "auto",
-    alignSelf: "center",
-    borderRadius: 10
   }
 });
