@@ -103,10 +103,10 @@ export default class ChatMessage extends Component {
                 style={{
                   alignSelf: "flex-start",
                   color: "white",
-                  fontSize: 23
+                  fontSize: 20
                 }}
               >
-                {item.author.username}
+                SMK
               </Text>
             </View>
             <View style={styles.msg}>
@@ -117,7 +117,7 @@ export default class ChatMessage extends Component {
                   fontSize: 20
                 }}
               >
-                {item.body}
+                {item.body} {this.state.delivered ? "Delivered" : ""}
               </Text>
             </View>
           </View>

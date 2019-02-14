@@ -117,7 +117,7 @@ export default class ChatMessage extends Component {
                   fontSize: 20
                 }}
               >
-                {item.body}
+                {item.body} {this.state.delivered ? "Delivered" : ""}
               </Text>
             </View>
           </View>

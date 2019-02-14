@@ -97,29 +97,12 @@ export default class ChatMessage extends Component {
         }}
       >
         {this.state.texts.map(item => (
-          <View>
-            <View style={styles.name}>
-              <Text
-                style={{
-                  alignSelf: "flex-start",
-                  color: "white",
-                  fontSize: 23
-                }}
-              >
-                {item.author.username}
-              </Text>
-            </View>
-            <View style={styles.msg}>
-              <Text
-                style={{
-                  alignSelf: "flex-start",
-                  color: "white",
-                  fontSize: 20
-                }}
-              >
-                {item.body}
-              </Text>
-            </View>
+          <View style={styles.msg}>
+            <Text
+              style={{ alignSelf: "flex-start", color: "white", fontSize: 20 }}
+            >
+              {item.author.username}: {item.body}
+            </Text>
           </View>
         ))}
         <Display enable={this.state.userleft.username ? true : false}>
@@ -173,13 +156,6 @@ const styles = StyleSheet.create({
   msg: {
     width: "85%",
     backgroundColor: "#7f8c8d",
-    marginBottom: 10,
-    height: "auto",
-    alignSelf: "center",
-    borderRadius: 10
-  },
-  name: {
-    width: "auto",
     marginBottom: 10,
     height: "auto",
     alignSelf: "center",

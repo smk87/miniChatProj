@@ -98,16 +98,8 @@ export default class ChatMessage extends Component {
       >
         {this.state.texts.map(item => (
           <View>
-            <View style={styles.name}>
-              <Text
-                style={{
-                  alignSelf: "flex-start",
-                  color: "white",
-                  fontSize: 23
-                }}
-              >
-                {item.author.username}
-              </Text>
+            <View style={styles.msg}>
+              <Text>SMK</Text>
             </View>
             <View style={styles.msg}>
               <Text
@@ -117,7 +109,7 @@ export default class ChatMessage extends Component {
                   fontSize: 20
                 }}
               >
-                {item.body}
+                {item.body} {this.state.delivered ? "Delivered" : ""}
               </Text>
             </View>
           </View>
@@ -180,6 +172,7 @@ const styles = StyleSheet.create({
   },
   name: {
     width: "auto",
+    backgroundColor: "#7f8c8d",
     marginBottom: 10,
     height: "auto",
     alignSelf: "center",

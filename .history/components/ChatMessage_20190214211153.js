@@ -32,11 +32,11 @@ export default class ChatMessage extends Component {
         author: {
           username: message.username
         },
-        body: message.message
+        body: message.message,
+        seen: false
       };
       // we tell the client to execute 'self update'
       this.setState({
-        delivered: true,
         texts: this.state.texts.concat(newText)
       });
     });
@@ -57,15 +57,27 @@ export default class ChatMessage extends Component {
       console.log(this.state.whotyping);
     });
 
+    this.props.socket.on("seen", message => {
+      if (this.state.texts.indexOf(message) !== -1) {
+        this.state.texts[this.props.texts.indexOf(message)].seen = true;
+        const temp = this.state.texts;
+        this.setState({
+          texts: temp
+        });
+      }
+    });
+
     this.props.socket.on("new message", message => {
       const newText = {
         author: {
           username: message.username
         },
-        body: message.message
+        body: message.message,
+        seen: false
       };
       // we tell the client to execute 'new message'
       this.setState({ texts: this.state.texts.concat(newText) });
+      this.props.socket.emit("seen", message);
     });
 
     this.props.socket.on("user left", data => {
@@ -117,7 +129,7 @@ export default class ChatMessage extends Component {
                   fontSize: 20
                 }}
               >
-                {item.body}
+                {item.body} {this.state.delivered ? "Delivered" : ""}
               </Text>
             </View>
           </View>

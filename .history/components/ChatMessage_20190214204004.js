@@ -32,11 +32,11 @@ export default class ChatMessage extends Component {
         author: {
           username: message.username
         },
-        body: message.message
+        body: message.message,
+        seen: false
       };
       // we tell the client to execute 'self update'
       this.setState({
-        delivered: true,
         texts: this.state.texts.concat(newText)
       });
     });
@@ -117,7 +117,7 @@ export default class ChatMessage extends Component {
                   fontSize: 20
                 }}
               >
-                {item.body}
+                {item.body} {this.state.delivered ? "Delivered" : ""}
               </Text>
             </View>
           </View>

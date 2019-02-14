@@ -106,7 +106,7 @@ export default class ChatMessage extends Component {
                   fontSize: 23
                 }}
               >
-                {item.author.username}
+                SMK
               </Text>
             </View>
             <View style={styles.msg}>
@@ -117,7 +117,7 @@ export default class ChatMessage extends Component {
                   fontSize: 20
                 }}
               >
-                {item.body}
+                {item.body} {this.state.delivered ? "Delivered" : ""}
               </Text>
             </View>
           </View>
