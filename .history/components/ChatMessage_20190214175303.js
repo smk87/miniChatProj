@@ -109,22 +109,9 @@ export default class ChatMessage extends Component {
             }}
           >
             {this.state.userleft.username}
-            {this.state.userleft.username ? " has left." : ""}
+            {this.state.userleft.username ? " has left. " : ""}
             {this.state.userleft.numUsers}
             {this.state.userleft.numUsers ? " Online." : ""}
-          </Text>
-        </Display>
-        <Display enable={this.state.userjoined.username ? true : false}>
-          <Text
-            style={{
-              alignSelf: "center",
-              marginBottom: 10
-            }}
-          >
-            {this.state.userjoined.username}
-            {this.state.userjoined.username ? " has joined." : ""}
-            {this.state.userjoined.numUsers}
-            {this.state.userjoined.numUsers ? " Online." : ""}
           </Text>
         </Display>
         <Display enable={this.state.whotyping ? true : false}>

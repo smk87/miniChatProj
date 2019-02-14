@@ -109,7 +109,7 @@ export default class ChatMessage extends Component {
             }}
           >
             {this.state.userleft.username}
-            {this.state.userleft.username ? " has left." : ""}
+            {this.state.userleft.username ? " has left. " : ""}
             {this.state.userleft.numUsers}
             {this.state.userleft.numUsers ? " Online." : ""}
           </Text>

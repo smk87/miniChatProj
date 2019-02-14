@@ -20,9 +20,9 @@ export default class ChatMessage extends Component {
 
     this.state = {
       texts: [],
+      typing: false,
       whotyping: [],
-      userleft: {},
-      userjoined: {}
+      userleft: {}
     };
 
     this.props.socket.on("self update", message => {
@@ -40,6 +40,7 @@ export default class ChatMessage extends Component {
     this.props.socket.on("typing", data => {
       if (this.state.whotyping.indexOf(data.username) === -1) {
         this.setState({
+          typing: true,
           whotyping: this.state.whotyping.concat(data.username)
         });
       }
@@ -48,6 +49,7 @@ export default class ChatMessage extends Component {
 
     this.props.socket.on("stop typing", data => {
       this.setState({
+        typing: false,
         whotyping: this.state.whotyping.filter(e => e !== data.username)
       });
       console.log(this.state.whotyping);
@@ -70,8 +72,8 @@ export default class ChatMessage extends Component {
     });
 
     this.props.socket.on("user joined", data => {
-      this.setState({ userjoined: data });
-      setTimeout(() => this.setState({ userjoined: {} }), 2000);
+      this.setState({ userleft: data });
+      setTimeout(() => this.setState({ userleft: {} }), 2000);
     });
   }
   componentWillMount() {
@@ -109,22 +111,9 @@ export default class ChatMessage extends Component {
             }}
           >
             {this.state.userleft.username}
-            {this.state.userleft.username ? " has left." : ""}
+            {this.state.userleft.username ? " has left. " : ""}
             {this.state.userleft.numUsers}
             {this.state.userleft.numUsers ? " Online." : ""}
-          </Text>
-        </Display>
-        <Display enable={this.state.userjoined.username ? true : false}>
-          <Text
-            style={{
-              alignSelf: "center",
-              marginBottom: 10
-            }}
-          >
-            {this.state.userjoined.username}
-            {this.state.userjoined.username ? " has joined." : ""}
-            {this.state.userjoined.numUsers}
-            {this.state.userjoined.numUsers ? " Online." : ""}
           </Text>
         </Display>
         <Display enable={this.state.whotyping ? true : false}>
