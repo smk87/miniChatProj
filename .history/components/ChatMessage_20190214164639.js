@@ -38,21 +38,13 @@ export default class ChatMessage extends Component {
     });
 
     this.props.socket.on("typing", data => {
-      if (this.state.whotyping.indexOf(data.username) === -1) {
-        this.setState({
-          typing: true,
-          whotyping: this.state.whotyping.concat(data.username)
-        });
-      }
-      console.log(this.state.whotyping);
-    });
-
-    this.props.socket.on("stop typing", data => {
       this.setState({
-        typing: false,
-        whotyping: this.state.whotyping.filter(e => e !== data.username)
+        typing: true,
+        whotyping: this.state.whotyping.concat(data, username)
       });
-      console.log(this.state.whotyping);
+    });
+    this.props.socket.on("stop typing", () => {
+      this.setState({ typing: false, whotyping: "" });
     });
 
     this.props.socket.on("new message", message => {
@@ -111,13 +103,11 @@ export default class ChatMessage extends Component {
             {this.state.userleft.numUsers ? " Online." : ""}
           </Text>
         </Display>
-        <Display enable={this.state.whotyping ? true : false}>
-          {this.state.whotyping.map(name => (
-            <Text style={{ alignSelf: "center", marginBottom: 10 }}>
-              {name}
-              {this.state.whotyping ? " is Typing..." : ""}
-            </Text>
-          ))}
+        <Display enable={this.state.typing ? true : false}>
+          <Text style={{ alignSelf: "center", marginBottom: 10 }}>
+            {this.state.whotyping}
+            {this.state.typing ? " is Typing..." : ""}
+          </Text>
         </Display>
       </ScrollView>
     );

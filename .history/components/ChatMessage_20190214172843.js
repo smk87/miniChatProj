@@ -38,15 +38,13 @@ export default class ChatMessage extends Component {
     });
 
     this.props.socket.on("typing", data => {
-      if (this.state.whotyping.indexOf(data.username) === -1) {
-        this.setState({
-          typing: true,
-          whotyping: this.state.whotyping.concat(data.username)
-        });
-      }
+      const name = this.state.whotyping.indexOf(data.username) === -1 ? this.state.whotyping.push(data.username) : this.state.whotyping
+      this.setState({
+        typing: true,
+        whotyping: name);
+      });
       console.log(this.state.whotyping);
-    });
-
+    };
     this.props.socket.on("stop typing", data => {
       this.setState({
         typing: false,
@@ -111,11 +109,11 @@ export default class ChatMessage extends Component {
             {this.state.userleft.numUsers ? " Online." : ""}
           </Text>
         </Display>
-        <Display enable={this.state.whotyping ? true : false}>
+        <Display enable={this.state.typing ? true : false}>
           {this.state.whotyping.map(name => (
             <Text style={{ alignSelf: "center", marginBottom: 10 }}>
               {name}
-              {this.state.whotyping ? " is Typing..." : ""}
+              {this.state.typing ? " is Typing..." : ""}
             </Text>
           ))}
         </Display>

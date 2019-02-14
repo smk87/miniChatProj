@@ -115,7 +115,7 @@ export default class ChatMessage extends Component {
           {this.state.whotyping.map(name => (
             <Text style={{ alignSelf: "center", marginBottom: 10 }}>
               {name}
-              {this.state.whotyping ? " is Typing..." : ""}
+              {this.state.typing ? " is Typing..." : ""}
             </Text>
           ))}
         </Display>
